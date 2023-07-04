@@ -5,19 +5,19 @@
 
 </head>
 <body>
-    <h1>Randstad fietsvergoeding Begijntjesbad Overijse</h1>
+    <h1>Randstad fietsvergoeding</h1>
 
     <form action="/process" method="post" enctype="multipart/form-data">
         
         <div class="input-box">
-            <label for="pdf">Kies je fietsvergoeding formulier</label>
+            <label for="pdf">Kies je fietsvergoeding formulier:</label>
             <input type="file" name="pdf" accept=".pdf" required>
         </div>
 
         
         <div class="input-box">
             <table>
-                <tr>
+                <tr class="header">
                     <th>Dag</th>
                     <th>Met de fiets?</th>
                 </tr>
@@ -107,14 +107,13 @@
         </div>
 
         <div class="input-box">
-            <!-- week selection input-->
-            <span>week</span>
+            <span>Week:</span>
             <input type="week" name="week">
 
         </div>
 
         <div class="input-box">
-            <span>Aantal kilometer</span>
+            <span>Aantal kilometers heen/terug: </span>
             <input type="number" name="km">
         </div>
 
