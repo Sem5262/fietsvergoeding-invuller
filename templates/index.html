@@ -1,8 +1,10 @@
+<!DOCTYPE html>
 <html lang="nl">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Randstad fietsvergoeding</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
-
 </head>
 <body>
     <div class="container">
@@ -10,10 +12,22 @@
         <form action="/process" method="post" enctype="multipart/form-data">
             
             <div class="input-box">
-                <label for="pdf">Kies uw formulier:</label>
-                <input type="file" name="pdf" accept=".pdf" required>
+                <span class="header"> Fietsvergoeding formulier:</span>
+                <input type="file" name="pdf" id="pdf" accept=".pdf"  required>
+                <span class="header"> Handtekening:</span>
+                <input type="file" name="signature" accept=".png, .jpg, .jpeg"  required>
+                <span class="details">Heb je nog geen handtekening? <a href="https://signaturely.com/online-signature/draw/" target="_blank">handtekening maken</a></span>
             </div>
 
+            <div class="input-box">
+                <span class="header"> Week:</span>
+                <input type="week" name="week" id="week" placeholder="Selecteer een week" required>
+            </div>
+
+            <div class="input-box">
+                <span class="header"> Aantal kilometer heen/terug:</span>
+                <input type="number" name="km" id="km" required>
+            </div>
             
             <div class="input-box">
                 <table>
@@ -26,11 +40,11 @@
                             Maandag
                         </th>
                         <th>
-                            <input type="radio" name="maandag" id="true" value="true" required>
-                            <label for="true">Ja</label>
+                            <input type="radio" name="maandag" id="maandag-true" value="true" required>
+                            <label for="maandag-true">Ja</label>
 
-                            <input type="radio" name="maandag" id="false" value="false" required>
-                            <label for="false">Nee</label>
+                            <input type="radio" name="maandag" id="maandag-false" value="false" required>
+                            <label for="maandag-false">Nee</label>
                         </th>
                     </tr>
                     <tr>
@@ -38,10 +52,11 @@
                             Dinsdag
                         </th>
                         <th>
-                            <input type="radio" name="dinsdag" id="true" value="true" required>
-                            <label for="true">Ja</label>
-                            <input type="radio" name="dinsdag" id="false" value="false" required>
-                            <label for="false">Nee</label>
+                            <input type="radio" name="dinsdag" id="dinsdag-true" value="true" required>
+                            <label for="dinsdag-true">Ja</label>
+
+                            <input type="radio" name="dinsdag" id="dinsdag-false" value="false" required>
+                            <label for="dinsdag-false">Nee</label>
                         </th>
                     </tr>
                     <tr>
@@ -49,11 +64,11 @@
                             Woensdag
                         </th>
                         <th>
-                            <input type="radio" name="woensdag" id="true" value="true" required>
-                            <label for="true">Ja</label>
+                            <input type="radio" name="woensdag" id="woensdag-true" value="true" required>
+                            <label for="woensdag-true">Ja</label>
 
-                            <input type="radio" name="woensdag" id="false" value="false" required>
-                            <label for="false">Nee</label>
+                            <input type="radio" name="woensdag" id="woensdag-false" value="false" required>
+                            <label for="woensdag-false">Nee</label>
                         </th>
                     </tr>
                     <tr>
@@ -61,11 +76,11 @@
                             Donderdag
                         </th>
                         <th>
-                            <input type="radio" name="donderdag" id="true" value="true" required>
-                            <label for="true">Ja</label>
+                            <input type="radio" name="donderdag" id="donderdag-true" value="true" required>
+                            <label for="donderdag-true">Ja</label>
 
-                            <input type="radio" name="donderdag" id="false" value="false" required>
-                            <label for="false">Nee</label>
+                            <input type="radio" name="donderdag" id="donderdag-false" value="false" required>
+                            <label for="donderdag-false">Nee</label>
                         </th>
                     </tr>
                     <tr>
@@ -73,11 +88,11 @@
                             Vrijdag
                         </th>
                         <th>
-                            <input type="radio" name="vrijdag" id="true" value="true" required>
-                            <label for="true">Ja</label>
+                            <input type="radio" name="vrijdag" id="vrijdag-true" value="true" required>
+                            <label for="vrijdag-true">Ja</label>
 
-                            <input type="radio" name="vrijdag" id="false" value="false" required>
-                            <label for="false">Nee</label>
+                            <input type="radio" name="vrijdag" id="vrijdag-false" value="false" required>
+                            <label for="vrijdag-false">Nee</label>
                         </th>
                     </tr>
                     <tr>
@@ -85,11 +100,11 @@
                             Zaterdag
                         </th>
                         <th>
-                            <input type="radio" name="zaterdag" id="true" value="true" required>
-                            <label for="true">Ja</label>
+                            <input type="radio" name="zaterdag" id="zaterdag-true" value="true" required>
+                            <label for="zaterdag-true">Ja</label>
 
-                            <input type="radio" name="zaterdag" id="false" value="false" required>
-                            <label for="false">Nee</label>
+                            <input type="radio" name="zaterdag" id="zaterdag-false" value="false" required>
+                            <label for="zaterdag-false">Nee</label>
                         </th>
                     </tr>
                     <tr>
@@ -97,26 +112,16 @@
                             Zondag
                         </th>
                         <th>
-                            <input type="radio" name="zondag" id="true" value="true" required>
-                            <label for="true">Ja</label>
-                            <input type="radio" name="zondag" id="false" value="false" required>
-                            <label for="false">Nee</label>
+                            <input type="radio" name="zondag" id="zondag-true" value="true" required>
+                            <label for="zondag-true">Ja</label>
+                            <input type="radio" name="zondag" id="zondag-false" value="false" required>
+                            <label for="zondag-false">Nee</label>
                         </th>
                     </tr>
                 </table>
             </div>
 
-            <div class="input-box">
-                <span>Week:</span>
-                <input type="week" name="week">
-
-            </div>
-
-            <div class="input-box">
-                <span>Aantal kilometers heen/terug: </span>
-                <input type="number" name="km">
-            </div>
-
+            
             <input type="submit" value="Invullen">
         </form>
     </div>   

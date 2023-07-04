@@ -4,6 +4,8 @@ import io
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from datetime import datetime, timedelta
+from reportlab.lib.utils import ImageReader
+from PIL import Image
 
 app = Flask(__name__)
 
@@ -31,14 +33,20 @@ def process():
     daylist = [maandag,dinsdag,woensdag,donderdag,vrijdag,zaterdag,zondag]
 
     uploaded_file = request.files['pdf']
-
-    # Read the uploaded PDF file with PyPDF2
-    input_pdf = PdfReader(uploaded_file)
-
-    # Create a BytesIO buffer for the watermark PDF
-    watermark_buffer = io.BytesIO()
+    uploaded_image = request.files['signature']
     
-    # Create a new PDF with ReportLab
+    uploaded_image = Image.open(uploaded_image)
+
+    new_width = 200
+    width, height = uploaded_image.size
+    new_height = int(height * (new_width / width))
+    rescaled_image = uploaded_image.resize((new_width, new_height))
+
+    signature = ImageReader(rescaled_image)
+    
+    
+    watermark_buffer = io.BytesIO()
+
     can = canvas.Canvas(watermark_buffer, pagesize=letter)
     can.drawString(135, 717, "Begijntjesbad Overijse")
     can.drawString(230, 499, str(aantal_km))
@@ -51,20 +59,17 @@ def process():
             can.drawString(510, 637 - (x*17), "___")
         else:
             can.drawString(410, 637 - (x*17), "__")
+
+    can.drawImage(signature, 50, 350, mask='auto')
         
-    
     can.save()
     
-    # Move to the beginning of the BytesIO buffer
     watermark_buffer.seek(0)
-    
-    # Read the watermark PDF with PyPDF2
     watermark_pdf = PdfReader(watermark_buffer)
-    
-    # Create a new PDF writer
+
     output_pdf = PdfWriter()
-    
-    # Merge the pages of the input PDF with the watermark PDF
+
+    input_pdf = PdfReader(uploaded_file)
     page = input_pdf.pages[0]
     page.merge_page(watermark_pdf.pages[0])
     output_pdf.add_page(page)
@@ -73,8 +78,6 @@ def process():
     output_buffer = io.BytesIO()
     output_pdf.write(output_buffer)
     output_buffer.seek(0)
-    
-
     
     # Return the modified PDF file as a downloadable attachment
     return send_file(output_buffer,  as_attachment = True, download_name='fietsvergoeding_'+ week +'.pdf')

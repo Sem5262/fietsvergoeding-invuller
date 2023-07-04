@@ -1,9 +1,9 @@
-/* Styles for the body and h1 */
-body {
+body, html {
     font-family: Arial, sans-serif;
     background-color: #fff;
     margin: 0;
     padding: 0;
+
     width: 100%;
     height: 100%;
     display: flex;
@@ -20,7 +20,6 @@ h1 {
     color: #333;
 }
 
-/* Styles for the form and input boxes */
 form {
     background-color: #cecece;
     margin-top: 10px;
@@ -28,12 +27,24 @@ form {
     width: 100%;
 
     border-radius: 10px;
+    
 }
 
 .input-box {
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
+.input-box span {
+    margin-bottom: 5px;
+}
+
+.input-box input:not([type="radio"]) {
+    padding: 6px 10px;
+    border-radius: 10px;
+    border-color: transparent;
+}
 .input-box input {
     padding: 6px 10px;
     border-radius: 10px;
@@ -41,7 +52,6 @@ form {
 }
 table {
     width: 90%;
-    max-width: 500px;
 }
 
 tr th {
@@ -75,5 +85,13 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #45a049;
+}
+
+
+span.details {
+    font-size: small;
+}
+span.header {
+    font-weight: 550;
 }
   
