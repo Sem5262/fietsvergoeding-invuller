@@ -6,6 +6,7 @@ from reportlab.lib.pagesizes import letter
 from datetime import datetime, timedelta
 from reportlab.lib.utils import ImageReader
 from PIL import Image
+import numpy as np
 
 app = Flask(__name__)
 
@@ -37,13 +38,9 @@ def process():
     
     uploaded_image = Image.open(uploaded_image)
 
-    new_width = 200
-    width, height = uploaded_image.size
-    new_height = int(height * (new_width / width))
-    rescaled_image = uploaded_image.resize((new_width, new_height))
 
-    signature = ImageReader(rescaled_image)
-    
+    cropped_image = crop_image(uploaded_image, target_width=100)
+    signature = ImageReader(cropped_image)
     
     watermark_buffer = io.BytesIO()
 
@@ -60,7 +57,7 @@ def process():
         else:
             can.drawString(410, 637 - (x*17), "__")
 
-    can.drawImage(signature, 50, 350, mask='auto')
+    can.drawImage(signature, 50, 370, mask='auto')
         
     can.save()
     
@@ -81,6 +78,31 @@ def process():
     
     # Return the modified PDF file as a downloadable attachment
     return send_file(output_buffer,  as_attachment = True, download_name='fietsvergoeding_'+ week +'.pdf')
+
+def crop_image(image, target_width):
+    # Convert the image to grayscale
+    grayscale_image = image.convert('L')
+    
+    # Convert the grayscale image to a NumPy array
+    np_image = np.array(grayscale_image)
+    
+    # Calculate the bounding box coordinates of the non-white region
+    non_white_coords = np.argwhere(np_image < 255)
+    min_y, min_x = np.min(non_white_coords, axis=0)
+    max_y, max_x = np.max(non_white_coords, axis=0)
+    
+    # Crop the image based on the bounding box coordinates
+    cropped_image = image.crop((min_x, min_y, max_x + 1, max_y + 1))
+    
+    # Calculate the new height based on the target width and the original aspect ratio
+    aspect_ratio = cropped_image.width / cropped_image.height
+    target_height = int(target_width / aspect_ratio)
+    
+    # Resize the cropped image to the target size
+    resized_image = cropped_image.resize((target_width, target_height))
+    
+    return resized_image
+
 
 def add_days_to_date(date_string, num_days):
     # Parse the input date string into a datetime object
