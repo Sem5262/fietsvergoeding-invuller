@@ -5,119 +5,120 @@
 
 </head>
 <body>
-    <h1>Randstad fietsvergoeding</h1>
+    <div class="container">
+        <h1>Randstad fietsvergoeding</h1>
+        <form action="/process" method="post" enctype="multipart/form-data">
+            
+            <div class="input-box">
+                <label for="pdf">Kies uw formulier:</label>
+                <input type="file" name="pdf" accept=".pdf" required>
+            </div>
 
-    <form action="/process" method="post" enctype="multipart/form-data">
-        
-        <div class="input-box">
-            <label for="pdf">Kies je fietsvergoeding formulier:</label>
-            <input type="file" name="pdf" accept=".pdf" required>
-        </div>
+            
+            <div class="input-box">
+                <table>
+                    <tr class="header">
+                        <th>Dag</th>
+                        <th>Met de fiets?</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Maandag
+                        </th>
+                        <th>
+                            <input type="radio" name="maandag" id="true" value="true" required>
+                            <label for="true">Ja</label>
 
-        
-        <div class="input-box">
-            <table>
-                <tr class="header">
-                    <th>Dag</th>
-                    <th>Met de fiets?</th>
-                </tr>
-                <tr>
-                    <th>
-                        Maandag
-                    </th>
-                    <th>
-                        <input type="radio" name="maandag" id="true" value="true" required>
-                        <label for="true">Ja</label>
+                            <input type="radio" name="maandag" id="false" value="false" required>
+                            <label for="false">Nee</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Dinsdag
+                        </th>
+                        <th>
+                            <input type="radio" name="dinsdag" id="true" value="true" required>
+                            <label for="true">Ja</label>
+                            <input type="radio" name="dinsdag" id="false" value="false" required>
+                            <label for="false">Nee</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Woensdag
+                        </th>
+                        <th>
+                            <input type="radio" name="woensdag" id="true" value="true" required>
+                            <label for="true">Ja</label>
 
-                        <input type="radio" name="maandag" id="false" value="false" required>
-                        <label for="false">Nee</label>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        Dinsdag
-                    </th>
-                    <th>
-                        <input type="radio" name="dinsdag" id="true" value="true" required>
-                        <label for="true">Ja</label>
-                        <input type="radio" name="dinsdag" id="false" value="false" required>
-                        <label for="false">Nee</label>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        Woensdag
-                    </th>
-                    <th>
-                        <input type="radio" name="woensdag" id="true" value="true" required>
-                        <label for="true">Ja</label>
+                            <input type="radio" name="woensdag" id="false" value="false" required>
+                            <label for="false">Nee</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Donderdag
+                        </th>
+                        <th>
+                            <input type="radio" name="donderdag" id="true" value="true" required>
+                            <label for="true">Ja</label>
 
-                        <input type="radio" name="woensdag" id="false" value="false" required>
-                        <label for="false">Nee</label>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        Donderdag
-                    </th>
-                    <th>
-                        <input type="radio" name="donderdag" id="true" value="true" required>
-                        <label for="true">Ja</label>
+                            <input type="radio" name="donderdag" id="false" value="false" required>
+                            <label for="false">Nee</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Vrijdag
+                        </th>
+                        <th>
+                            <input type="radio" name="vrijdag" id="true" value="true" required>
+                            <label for="true">Ja</label>
 
-                        <input type="radio" name="donderdag" id="false" value="false" required>
-                        <label for="false">Nee</label>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        Vrijdag
-                    </th>
-                    <th>
-                        <input type="radio" name="vrijdag" id="true" value="true" required>
-                        <label for="true">Ja</label>
+                            <input type="radio" name="vrijdag" id="false" value="false" required>
+                            <label for="false">Nee</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Zaterdag
+                        </th>
+                        <th>
+                            <input type="radio" name="zaterdag" id="true" value="true" required>
+                            <label for="true">Ja</label>
 
-                        <input type="radio" name="vrijdag" id="false" value="false" required>
-                        <label for="false">Nee</label>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        Zaterdag
-                    </th>
-                    <th>
-                        <input type="radio" name="zaterdag" id="true" value="true" required>
-                        <label for="true">Ja</label>
+                            <input type="radio" name="zaterdag" id="false" value="false" required>
+                            <label for="false">Nee</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Zondag
+                        </th>
+                        <th>
+                            <input type="radio" name="zondag" id="true" value="true" required>
+                            <label for="true">Ja</label>
+                            <input type="radio" name="zondag" id="false" value="false" required>
+                            <label for="false">Nee</label>
+                        </th>
+                    </tr>
+                </table>
+            </div>
 
-                        <input type="radio" name="zaterdag" id="false" value="false" required>
-                        <label for="false">Nee</label>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        Zondag
-                    </th>
-                    <th>
-                        <input type="radio" name="zondag" id="true" value="true" required>
-                        <label for="true">Ja</label>
-                        <input type="radio" name="zondag" id="false" value="false" required>
-                        <label for="false">Nee</label>
-                    </th>
-                </tr>
-            </table>
-        </div>
+            <div class="input-box">
+                <span>Week:</span>
+                <input type="week" name="week">
 
-        <div class="input-box">
-            <span>Week:</span>
-            <input type="week" name="week">
+            </div>
 
-        </div>
+            <div class="input-box">
+                <span>Aantal kilometers heen/terug: </span>
+                <input type="number" name="km">
+            </div>
 
-        <div class="input-box">
-            <span>Aantal kilometers heen/terug: </span>
-            <input type="number" name="km">
-        </div>
-
-        <input type="submit" value="Invullen">
-    </form>
+            <input type="submit" value="Invullen">
+        </form>
+    </div>   
 </body>
 </html>
