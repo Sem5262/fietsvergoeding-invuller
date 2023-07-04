@@ -101,4 +101,4 @@ def get_first_day_of_week(year_week):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
