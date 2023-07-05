@@ -29,6 +29,7 @@ def process():
     zondag = request.form.get('zondag')
     aantal_km = request.form.get('km')
     week = request.form.get('week')
+    width = request.form.get('width')
     firstday = get_first_day_of_week(week)
 
     daylist = [maandag,dinsdag,woensdag,donderdag,vrijdag,zaterdag,zondag]
@@ -39,7 +40,7 @@ def process():
     uploaded_image = Image.open(uploaded_image)
 
 
-    cropped_image = crop_image(uploaded_image, target_width=100)
+    cropped_image = crop_image(uploaded_image, target_width= int(width))
     signature = ImageReader(cropped_image)
     
     watermark_buffer = io.BytesIO()
@@ -77,7 +78,7 @@ def process():
     output_buffer.seek(0)
     
     # Return the modified PDF file as a downloadable attachment
-    return send_file(output_buffer,  as_attachment = True, download_name='fietsvergoeding_'+ week +'.pdf')
+    return send_file(output_buffer,  as_attachment = False, download_name='fietsvergoeding_'+ week +'.pdf')
 
 def crop_image(image, target_width):
     # Convert the image to grayscale
