@@ -47,7 +47,7 @@ def process():
 
     can = canvas.Canvas(watermark_buffer, pagesize=letter)
     can.drawString(135, 717, "Begijntjesbad Overijse")
-    can.drawString(230, 499, str(aantal_km))
+    can.drawString(230, 499, aantal_km)
     
     for x in range(7):
 
